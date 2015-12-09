@@ -5,8 +5,7 @@ cd $(dirname $0)
 # Install apk packages and remove apk cache when finished.
 
 apk --update add \
-    nginx \
-    php-fpm \
+    nginx php-fpm php-cli \
     supervisor
 
 rm -rf /var/cache/apk/*

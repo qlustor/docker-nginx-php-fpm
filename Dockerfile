@@ -1,10 +1,12 @@
-FROM alpine
-MAINTAINER Ian Bytchek
+FROM alpine:3.2
+MAINTAINER Leigh Phillips <neurocis@qlustor.com>
 
-COPY . /docker
-RUN /docker/script/build.sh
+ADD . /docker
+RUN /docker/build.sh
+
 EXPOSE 80 443
-VOLUME /docker/configuration
+VOLUME /docker/config
 
-ENTRYPOINT ["/docker/script/entrypoint.sh"]
 CMD ["nginx-php-fpm"]
+ENTRYPOINT ["/docker/entrypoint.sh"]
+
