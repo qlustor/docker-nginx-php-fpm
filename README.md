@@ -14,17 +14,17 @@ docker build -t qlustor/nginx-php-fpm .
 docker pull qlustor/nginx-php-fpm
 
 # Run
-docker run -d -p 80:80 -p 443:443 --name app qlustor/nginx-php-fpm
+docker run -d -p 80:80 -p 443:443 --name nginx-php-fpm qlustor/nginx-php-fpm
 
 # Run with a mounted volume
-docker run -d -p 80:80 -p 443:443 -v $PATH:/docker/configuration --name app qlustor/nginx-php-fpm
+docker run -d -p 80:80 -p 443:443 -v $PATH:/var/www --name nginx-php-fpm qlustor/nginx-php-fpm
 ```
 
 ## Bonus
 
 ```
 # Connect to an existing container.
-docker exec -ti haproxy sh
+docker exec -ti nginx-php-fpm sh
  
 # Remove exited containers.
 docker ps -a | grep 'Exited' | awk '{print $1}' | xargs docker rm
