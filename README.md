@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/qlustor/nginx-php-fpm:latest.svg)](https://imagelayers.io/?images=qlustor/nginx-php-fpm:latest 'Get your own badge on imagelayers.io')
+
 # Docker: nginx + php-fpm
 
 Docker Nginx & PHP-FPM image built on Alpine Linux micro OS with the final image size of 58 MB vs. 100+ MB compared to the Ubuntu / Debian equivalent. It's intended to be used as a base image for building final app images ready for deployment, but can be used as is and configured via volumes.
