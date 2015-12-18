@@ -1,5 +1,5 @@
-MAINTAINER Team QLUSTOR <team@qlustor.com>
 FROM alpine:3.2
+MAINTAINER Team QLUSTOR <team@qlustor.com>
 
 # Install supervisord
 RUN apk --update add supervisor && \
