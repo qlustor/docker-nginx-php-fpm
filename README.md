@@ -1,4 +1,4 @@
-[![](https://badge.imagelayers.io/qlustor/nginx-php-fpm:latest.svg)](https://imagelayers.io/?images=qlustor/nginx-php-fpm:latest 'Get your own badge on imagelayers.io')
+[![](https://badge.imagelayers.io/qlustor/nginx-php-fpm.svg)](https://imagelayers.io/?images=qlustor/nginx-php-fpm 'Get your own badge on imagelayers.io')
 
 # Docker: nginx + php-fpm
 
