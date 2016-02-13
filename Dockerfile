@@ -1,12 +1,16 @@
-FROM alpine:3.3
+#BUILDS qlustor/nginx-php-fpm
+
+FROM gliderlabs/alpine:3.3
 MAINTAINER Team QLUSTOR <team@qlustor.com>
 
-# Install supervisord
-RUN apk --update add supervisor && \
-    rm -rf /var/cache/apk/*
+# Install runit
+RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories \
+ && apk-install --update ca-certificates                \
+ && update-ca-certificates                              \
+ && apk-install runit
 
 # Install nginx-php-fpm
-RUN apk --update add nginx php php-fpm php-cli php-soap php-json && \
+RUN apk-install --update nginx php php-fpm php-cli php-soap php-json && \
     sed -i \
         -e 's/group =.*/group = nginx/' \
         -e 's/user =.*/user = nginx/' \
@@ -17,12 +21,11 @@ RUN apk --update add nginx php php-fpm php-cli php-soap php-json && \
     sed -i \
         -e '/open_basedir =/s/^/\;/' \
         /etc/php/php.ini && \
-    rm -rf /var/www/* && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/www/*
 
 ADD . /
 
 EXPOSE 80 443
-VOLUME /var/www
-ENTRYPOINT supervisord --nodaemon --configuration="/etc/supervisord.conf"
+#VOLUME /var/www
+ENTRYPOINT ["/sbin/runit-docker"]
 
