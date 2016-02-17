@@ -1,13 +1,7 @@
 #BUILDS qlustor/nginx-php-fpm
 
-FROM gliderlabs/alpine:3.3
+FROM qlustor/alpine-runit:3.3
 MAINTAINER Team QLUSTOR <team@qlustor.com>
-
-# Install runit
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories \
- && apk-install --update ca-certificates                \
- && update-ca-certificates                              \
- && apk-install runit
 
 # Install nginx-php-fpm
 RUN apk-install --update nginx php php-fpm php-cli php-soap php-json && \
@@ -22,7 +16,6 @@ RUN apk-install --update nginx php php-fpm php-cli php-soap php-json && \
         -e '/open_basedir =/s/^/\;/' \
         /etc/php/php.ini && \
     rm -rf /var/www/*
-
 ADD . /
 
 EXPOSE 80 443
