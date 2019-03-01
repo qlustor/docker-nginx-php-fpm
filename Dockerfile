@@ -4,19 +4,21 @@ FROM qlustor/alpine-runit:3.8
 MAINTAINER Team QLUSTOR <team@qlustor.com>
 
 # Install nginx-php-fpm
-RUN apk-install --update nginx php php-fpm php-cli php-soap php-json && \
-    sed -i \
+ADD . /
+RUN chmod +x /etc/service/nginx/run \
+ && chmod +x /etc/service/php-fpm/run \
+ && apk-install --update nginx php php-fpm php-cli php-soap php-json \
+ && sed -i \
         -e 's/group =.*/group = nginx/' \
         -e 's/user =.*/user = nginx/' \
         -e 's/listen\.owner.*/listen\.owner = nginx/' \
         -e 's/listen\.group.*/listen\.group = nginx/' \
         -e 's/error_log =.*/error_log = \/dev\/stdout/' \
-        /etc/php/php-fpm.conf && \
-    sed -i \
+        /etc/php/php-fpm.conf \
+ && sed -i \
         -e '/open_basedir =/s/^/\;/' \
-        /etc/php/php.ini && \
-    rm -rf /var/www/*
-ADD . /
+        /etc/php/php.ini \
+ && rm -rf /var/www/*
 
 EXPOSE 80 443
 #VOLUME /var/www
