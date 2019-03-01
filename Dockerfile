@@ -1,6 +1,6 @@
 #BUILDS qlustor/nginx-php-fpm
 
-FROM qlustor/alpine-runit:3.3
+FROM qlustor/alpine-runit:3.8
 MAINTAINER Team QLUSTOR <team@qlustor.com>
 
 # Install nginx-php-fpm
